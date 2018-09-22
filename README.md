@@ -13,22 +13,24 @@ Web UI <-> Controller <-> Console UI
 Also, there is a separate logging daemon available.
 
 ### UI Implementation
-> UI is implemented by curses library
-> (Unix Only)
->                                   m/M       +-------------+
->                              +------------->+RaspAuto Mgr.|
->                              |              +-------------+
->                          Exit|    r/R       +-------------+
->                            ^ +------------->+Remote Conn. |
->                         e/E| |    b/B       +-------------+
->                            | |
->+---------+   h/H      +------+--+    i/I    +-------------+
->|Help page<------------+O|er|iew +----------->Detailed Info|
->+---------+   b/B      +-----^---+    b/B    +-------------+
->                            ||
->                         s/S||b/B
->                            ||
->                            ||
->                       +----v--------+
->                       |Detailed Stat|
->                       +-------------+
+```
+UI is implemented by curses library
+(Unix Only)
+                                   m/M       +-------------+
+                              +------------->+RaspAuto Mgr.|
+                              |              +-------------+
+                          Exit|    r/R       +-------------+
+                            ^ +------------->+Remote Conn. |
+                         e/E| |    b/B       +-------------+
+                            | |
++---------+   h/H      +------+--+    i/I    +-------------+
+|Help page<------------+O|er|iew +----------->Detailed Info|
++---------+   b/B      +-----^---+    b/B    +-------------+
+                            ||
+                         s/S||b/B
+                            ||
+                            ||
+                       +----v--------+
+                       |Detailed Stat|
+                       +-------------+
+```
