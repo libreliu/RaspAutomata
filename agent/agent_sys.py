@@ -10,3 +10,5 @@ def get_cpu_info():
     ret['model_name'] = model_name
     ret['data'] = data
     return ret
+
+
