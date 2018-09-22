@@ -24,7 +24,7 @@ UI is implemented by curses library
                          e/E| |    b/B       +-------------+
                             | |
 +---------+   h/H      +------+--+    i/I    +-------------+
-|Help page<------------+O|er|iew +----------->Detailed Info|
+|Help page<------------+Overview +----------->Detailed Info|
 +---------+   b/B      +-----^---+    b/B    +-------------+
                             ||
                          s/S||b/B
