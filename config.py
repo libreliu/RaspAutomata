@@ -25,3 +25,9 @@ class cmd_handle_conf:
 	# May fail silently, comforming to the settings of SSH Client
 	exec_renvvar={'LANG':'C', 'LC_ALL':'en_US.UTF-8'}
 	exec_charset="utf-8"
+
+class conui_conf:
+	template_path = "template/"
+
+cmd_handle = cmd_handle_conf()
+conui = conui_conf()
