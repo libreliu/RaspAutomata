@@ -1,3 +1,5 @@
+SOFT_VERSION = "0.1"
+
 class cmd_handle_conf:
 	local_exec=False
 	remote_exec=True
@@ -28,6 +30,9 @@ class cmd_handle_conf:
 
 class conui_conf:
 	template_path = "template/"
+	main_title = "RaspAutomata ver" + SOFT_VERSION
+	info_title = "Information"
+	stat_title = "Statistics"
 
 cmd_handle = cmd_handle_conf()
 conui = conui_conf()

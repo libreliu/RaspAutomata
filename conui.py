@@ -29,12 +29,15 @@ def do_template_conv(h, w, pos, template, dparam):
 	fmt_li = template.format(**dparam).split("\n")
 	# Do line wrap
 	i = 0
-	for elem in fmt_li:
+	while i < len(fmt_li):
+		elem = fmt_li[i]
 		if len(elem) > w:
-			try:
-				fmt_li[i + 1] = elem[w:].join(fmt_li[i + 1])
-			except IndexError:  # No next line available
+			if len(fmt_li) > i + 1:
+				fmt_li[i + 1] = fmt_li[i + 1] + elem[w:]
+			else:   # No next line available
 				fmt_li.append(elem[w:])
+			# Remember to erase the old!
+			fmt_li[i] = elem[:w]
 		i = i + 1
 	return fmt_li[pos:pos+h]
 	
@@ -45,20 +48,28 @@ def fill_panel_blank(li, handle):
 		i = i + 1
 	
 def draw_main_panel(main_h, main_w):
-	title = "RaspAutomata"
-	main.addstr(0,min(int(main_w / 2) - int(len(title)/2) , main_w - len(title)), title)
+	main.addstr(0,min(int(main_w / 2) - int(len(config.conui.main_title)/2) , main_w - len(config.conui.main_title)), config.conui.main_title)
 	
-	dparam = {"evnt_rpt" : "No event available!!"}
+	dparam = {"evnt_rpt" : "nope"}
 	li = do_template_conv(main_h - 2, main_w - 2, 0, acquire_template("main"), dparam)
 	fill_panel_blank(li, main)
 
 def draw_stat_panel(stat_h, stat_w):
-	title = "Statistics"
-	stat.addstr(0,min(int(stat_w / 2) - int(len(title)/2) , stat_w - len(title)), title)
+	stat.addstr(0,min(int(stat_w / 2) - int(len(config.conui.stat_title)/2) , stat_w - len(config.conui.stat_title)), config.conui.stat_title)
+
+		
+	dparam = {"evnt_rpt" : "nope"}
+	li = do_template_conv(stat_h - 2, stat_w - 2, 0, acquire_template("stat"), dparam)
+	fill_panel_blank(li, stat)
+
 
 def draw_info_panel(info_h, info_w):
-	title = "Infomation"
-	info.addstr(0,min(int(info_w / 2) - int(len(title)/2) , info_w - len(title)), title)
+	info.addstr(0,min(int(info_w / 2) - int(len(config.conui.info_title)/2) , info_w - len(config.conui.info_title)), config.conui.info_title)
+	
+	dparam = {"uptime" : "10h", "ip" : "192.168.1.1", "daemon_status" : "stopped"}
+	li = do_template_conv(info_h - 2, info_w - 2, 0, acquire_template("info"), dparam)
+	fill_panel_blank(li, info)
+
 	
 def resize_win():
 	''' Window layout:
