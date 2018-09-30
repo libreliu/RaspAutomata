@@ -1,4 +1,7 @@
+import os
+
 SOFT_VERSION = "0.1"
+
 
 class cmd_handle_conf:
 	local_exec=False
@@ -34,5 +37,10 @@ class conui_conf:
 	info_title = "Information"
 	stat_title = "Statistics"
 
+class query_conf:
+	def __init__(self):
+		self.query_plugin_path = os.path.join(os.getcwd(), "query")
+
 cmd_handle = cmd_handle_conf()
 conui = conui_conf()
+query = query_conf()

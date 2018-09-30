@@ -1,3 +1,6 @@
-Uptime:{uptime}
-IPAddr:{ip}
-Daemon:{daemon_status}
+      Uptime
+{uptime}
+        IP
+{ip}
+      Daemon
+{daemon_status}

@@ -33,4 +33,29 @@ UI is implemented by curses library
                        +----v--------+
                        |Detailed Stat|
                        +-------------+
+
+Query: Processes that can be excuted very fast
+Agent: Could schedule Query and store it into db; plugins for daemon
 ```
+
+### Script File Description
+Script file is used to record session operations and used for audit.
+the script file format:
+```
+struct script_file {
+	// Time, in seconds
+	uint64 starttime;
+	uint64 stoptime;
+	// The $TERM variable
+	char term[50];
+	uint32 term_x;
+	uint32 term_y;
+}
+```
+Followed by a bunch of records:
+```
+struct script_record {
+	// Milliseconds before last packet; **49h at most**
+	uint32 msec;
+	char seq[512];
+}

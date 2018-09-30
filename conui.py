@@ -1,6 +1,7 @@
 import curses, time
 import config
 import os
+import uifetch
 
 screen = curses.initscr()
 main = curses.newwin(3,3,0,0)
@@ -47,29 +48,11 @@ def fill_panel_blank(li, handle):
 		handle.addstr(i, 1, elem)
 		i = i + 1
 	
-def draw_main_panel(main_h, main_w):
-	main.addstr(0,min(int(main_w / 2) - int(len(config.conui.main_title)/2) , main_w - len(config.conui.main_title)), config.conui.main_title)
-	
-	dparam = {"evnt_rpt" : "nope"}
-	li = do_template_conv(main_h - 2, main_w - 2, 0, acquire_template("main"), dparam)
-	fill_panel_blank(li, main)
+def draw_panel(h, w, win, title, dparam, pos, tempname):
+	win.addstr(0, min(int(w / 2) - int(len(title)/2), w - len(title)), title)
 
-def draw_stat_panel(stat_h, stat_w):
-	stat.addstr(0,min(int(stat_w / 2) - int(len(config.conui.stat_title)/2) , stat_w - len(config.conui.stat_title)), config.conui.stat_title)
-
-		
-	dparam = {"evnt_rpt" : "nope"}
-	li = do_template_conv(stat_h - 2, stat_w - 2, 0, acquire_template("stat"), dparam)
-	fill_panel_blank(li, stat)
-
-
-def draw_info_panel(info_h, info_w):
-	info.addstr(0,min(int(info_w / 2) - int(len(config.conui.info_title)/2) , info_w - len(config.conui.info_title)), config.conui.info_title)
-	
-	dparam = {"uptime" : "10h", "ip" : "192.168.1.1", "daemon_status" : "stopped"}
-	li = do_template_conv(info_h - 2, info_w - 2, 0, acquire_template("info"), dparam)
-	fill_panel_blank(li, info)
-
+	li = do_template_conv(h - 2, w - 2, pos, acquire_template(tempname), dparam)
+	fill_panel_blank(li, win)
 	
 def resize_win():
 	''' Window layout:
@@ -82,7 +65,6 @@ def resize_win():
 	+===============================+
 	'''
 	height, width = screen.getmaxyx()
-	print(height, width)
 	main_x = 0
 	main_y = 0
 	main_h = height
@@ -138,16 +120,24 @@ def main_scr():
 		screen.keypad(True)
 		stat_h,stat_w,info_h,info_w,main_h,main_w = resize_win()
 
-		draw_main_panel(main_h,main_w)
-		draw_stat_panel(stat_h,stat_w)
-		draw_info_panel(info_h,info_w)
-		
+		# draw_panel(h, w, win, title, dparam, pos, tempname)
+		draw_panel(main_h, main_w, main, config.conui.main_title 
+			,{"evnt_rpt" : "nope"}, 0, "main")
+		draw_panel(stat_h, stat_w, stat, config.conui.stat_title 
+			,{"evnt_rpt" : "nope"}, 0, "stat")
+		draw_panel(info_h, info_w, info, config.conui.info_title 
+			,{"uptime" : "10h",
+			  "ip" : uifetch.f.query("get_net_info",{})['ip'], "daemon_status" : "stopped"}, 0, "info")
+	
 		refresh()
 		main.getch()
 		
 	finally:
 		screen.keypad(False)
 		curses.endwin()
+
+def choose_shell():
+	pass
 
 
 main_scr()

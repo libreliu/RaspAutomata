@@ -1,11 +1,15 @@
 from datetime import date
 
-class agent:
+class Agent:
 	def __init__(self, cfg):
 		self.cfg = cfg
 	
 	def run():
-		pass
+		''' Virtual method.
+		Return a dict as result. '''
+
+		print("This is mere interface.")
+		print("You should create your own instance of it")
 	
 	def report(self, agent_name, kw):
 		''' Report and log to database '''
