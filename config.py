@@ -32,7 +32,7 @@ class cmd_handle_conf:
 	exec_charset="utf-8"
 
 class conui_conf:
-	template_path = "template/"
+	template_path = "/conui/template/"
 	main_title = "RaspAutomata ver" + SOFT_VERSION
 	info_title = "Information"
 	stat_title = "Statistics"

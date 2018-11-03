@@ -1,0 +1,6 @@
+      Uptime
+{uptime}
+        IP
+{ip}
+      Daemon
+{daemon_status}
